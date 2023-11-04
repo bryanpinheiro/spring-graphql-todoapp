@@ -1,0 +1,32 @@
+# This "Todo" type defines the queryable fields for every todo in our data source.
+type Todo {
+    id: ID!
+    title: String!
+    completed: Boolean!
+}
+
+# Input type for creating a Todo
+input TodoCreateInput {
+    title: String!
+}
+
+# Input type for updating a Todo
+input TodoUpdateInput {
+    id: ID!
+    completed: Boolean!
+}
+
+# The "Query" type is special: it lists all of the available queries that
+# clients can execute, along with the return type for each. In this
+# case, the "todos" query returns an array of zero or more Todos (defined above).
+type Query {
+    todos: [Todo] # Query to get a list of Todos
+    todo(id: ID!): Todo # Query to get a todo by ID
+}
+
+# The "Mutation" type is used for modifying data on the server.
+type Mutation {
+    createTodo(input: TodoCreateInput!): Todo # Mutation to create a Todo
+    updateTodo(input: TodoUpdateInput!): Todo # Mutation to update a Todo
+    deleteTodo(id: ID!): Todo # Mutation to delete a Todo
+}
